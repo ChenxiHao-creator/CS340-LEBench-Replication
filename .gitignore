@@ -1,1 +1,29 @@
+# Kernel build artifacts
+*.o
+*.ko
+*.bin
+*.img
+vmlinux
+System.map
 
+# VM images and large files
+*.vdi
+*.vhd
+*.iso
+
+# Huge temporary log files (small experiment logs will be committed manually in logs folder)
+*.large.log
+
+# Editor cache files
+.DS_Store
+*.swp
+*.swo
+__pycache__/
+*.pyc
+
+# Build directories
+build/
+out/
+
+# Local environment secrets
+.env
