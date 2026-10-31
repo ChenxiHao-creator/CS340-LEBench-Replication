@@ -1,0 +1,27 @@
+===================== PRECHECK START =====================
+Time: Sat Oct 31 01:27:13 PDT 2026
+Kernel version: 4.15.0-213-generic
+CPU Info: model name : 13th Gen Intel(R) Core(TM) i9-13900H
+
+>>> 1. Boot cmdline:
+BOOT_IMAGE=/boot/vmlinuz-4.15.0-213-generic root=UUID=e61f22ac-4587-4615-bb1e-86fbe41883fb ro find_preseed=/preseed.cfg auto noprompt priority=critical locale=en_US quiet splash pti=on nopcid
+
+>>> 2. Check PTI (KPTI) status:
+[    0.000000] Kernel/User page tables isolation: enabled
+✅ PTI / KPTI: ENABLED
+
+>>> 3. Check PCID support & status:
+✅ CPU hardware support PCID
+⚠️  Kernel cmdline: PCID is DISABLED by nopcid
+
+>>> 4. CPU frequency governor:
+ℹ️  No cpufreq interface (VMware VM - normal). Noise control must be host-side: Windows power plan = High performance, AC plugged in
+
+>>> 5. Check background noise services:
+✅ snapd stopped
+✅ unattended-upgrades stopped
+
+>>> 6. Expected state check (arg: C):
+✅ State C confirmed (pti=on nopcid)
+
+===================== PRECHECK END =====================
