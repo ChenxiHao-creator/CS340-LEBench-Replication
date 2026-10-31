@@ -1,0 +1,28 @@
+suhongyu@ubuntu:~$ ~/precheck.sh A
+===================== PRECHECK START =====================
+Time: Sat Oct 31 00:55:27 PDT 2026
+Kernel version: 4.15.0-213-generic
+CPU Info: model name	: 13th Gen Intel(R) Core(TM) i9-13900H
+
+>>> 1. Boot cmdline:
+BOOT_IMAGE=/boot/vmlinuz-4.15.0-213-generic root=UUID=e61f22ac-4587-4615-bb1e-86fbe41883fb ro find_preseed=/preseed.cfg auto noprompt priority=critical locale=en_US quiet splash pti=off
+
+>>> 2. Check PTI (KPTI) status:
+❌ PTI / KPTI: DISABLED
+
+>>> 3. Check PCID support & status:
+✅ CPU hardware support PCID
+✅ PCID is enabled (if CPU support)
+
+>>> 4. CPU frequency governor:
+ℹ️  No cpufreq interface (VMware VM - normal). Noise control must be host-side: Windows power plan = High performance, AC plugged in
+
+>>> 5. Check background noise services:
+✅ snapd stopped
+✅ unattended-upgrades stopped
+
+>>> 6. Expected state check (arg: A):
+✅ State A confirmed (pti=off)
+
+===================== PRECHECK END =====================
+If everything looks good, you can run benchmark now!
