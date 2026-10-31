@@ -1,0 +1,23 @@
+======================================
+      Environment Precheck          
+======================================
+
+[1] Kernel Version:
+4.15.0-041500-generic
+
+[2] Current Boot Cmdline:
+BOOT_IMAGE=/boot/vmlinuz-4.15.0-041500-generic root=UUID=b3f38b19-032c-4953-b435-020d14a78472 ro quiet splash nomodeset
+
+[3] KPTI Status (Isolation):
+=> KPTI is [ENABLED]
+
+[4] CPU PCID Support:
+=> PCID supported (pcid flag present)
+
+[5] Current CPU Frequency Governor:
+No cpufreq interface (possibly unsupported)
+
+[6] Current Frequency (MHz):
+CPU MHz:             2995.212
+======================================
+deng@ubuntu:~/LEBench_Workspace/scripts$
