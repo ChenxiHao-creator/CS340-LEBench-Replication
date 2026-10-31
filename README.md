@@ -14,10 +14,15 @@ PCID hardware mitigation for KPTI overhead (Fig.3)
 
 ## Repository Structure
 docs/         # Project report, methodology notes, experiment documentation
+
 logs/         # Raw benchmark outputs, perf stat logs, repeated experimental data
+
 scripts/      # Automation scripts: LEBench runner, boot parameter setup, data parsing & plotting
+
 .gitignore
+
 README.md
+
 original_commit.txt  # Record the exact commit hash of the upstream LEBench we replicate
 
 ## Original Repository
