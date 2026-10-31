@@ -22,3 +22,39 @@ CPU MHz:             2995.214
 ======================================
 
 [开始运行 LEBench 和 Perf...]
+======================================
+      环境预检查 (Precheck)          
+======================================
+
+[1] 内核版本 (Kernel Version):
+4.15.0-041500-generic
+
+[2] 当前启动参数 (Cmdline):
+BOOT_IMAGE=/boot/vmlinuz-4.15.0-041500-generic root=UUID=b3f38b19-032c-4953-b435-020d14a78472 ro find_preseed=/preseed.cfg auto noprompt priority=critical locale=en_US quiet splash pti=off nomodeset
+
+[3] KPTI 状态 (Isolation):
+=> KPTI 是【关闭】状态 (disabled / pti=off)
+
+[4] CPU 是否支持 PCID:
+=> 支持 PCID (存在 pcid flag)
+
+[5] 当前 CPU 调频模式 (Governor):
+未开启调频 (可能不支持)
+
+[6] 当前频率 (MHz):
+CPU MHz:             2995.214
+======================================
+[开始运行 LEBench 和 Perf...]
+Traceback (most recent call last):
+  File "run.py", line 134, in <module>
+    raise ValueError('$LEBENCH_DIR is not set. Example: "/home/username/LEBench/".')
+ValueError: $LEBENCH_DIR is not set. Example: "/home/username/LEBench/".
+
+ Performance counter stats for 'python run.py -t read':
+
+   <not supported>      cycles                                                      
+   <not supported>      dTLB-load-misses                                            
+   <not supported>      dTLB-loads                                                  
+
+       0.036822021 seconds time elapsed
+
