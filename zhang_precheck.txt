@@ -1,0 +1,23 @@
+======================================
+      环境预检查 (Precheck)          
+======================================
+
+[1] 内核版本 (Kernel Version):
+6.8.0-138-generic
+
+[2] 当前启动参数 (Cmdline):
+BOOT_IMAGE=/boot/vmlinuz-6.8.0-138-generic root=UUID=dd2f557a-f197-4c03-b92f-388032f5101e ro quiet splash nomodeset vt.handoff=7
+
+[3] KPTI 状态 (Isolation):
+=> KPTI 是【关闭】状态 (disabled / pti=off)
+
+[4] CPU 是否支持 PCID:
+=> 支持 PCID (存在 pcid flag)
+
+[5] 当前 CPU 调频模式 (Governor):
+performance
+
+[6] 当前频率 (MHz):
+CPU max MHz:                             4500.0000
+CPU min MHz:                             400.0000
+======================================
