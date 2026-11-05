@@ -31,3 +31,4 @@
 | small-read (1 page) | 3 | | |
 | med-read (10 pages) | 3 | | |
 | big-read (10000 pages) | 3 | | |
+
