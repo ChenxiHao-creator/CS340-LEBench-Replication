@@ -1,0 +1,23 @@
+======================================
+      Environment Precheck            
+======================================
+
+[1] Kernel Version:
+6.8.0-138-generic
+
+[2] Current Boot Cmdline:
+BOOT_IMAGE=/boot/vmlinuz-6.8.0-138-generic root=UUID=dd2f557a-f197-4c03-b92f-388032f5101e ro quiet splash nomodeset vt.handoff=7
+
+[3] KPTI Status (Isolation):
+=> KPTI is [DISABLED] (disabled / pti=off)
+
+[4] CPU PCID Support:
+=> PCID supported (pcid flag present)
+
+[5] Current CPU Frequency Governor:
+performance
+
+[6] Current Frequency (MHz):
+CPU max MHz:                             4500.0000
+CPU min MHz:                             400.0000
+======================================
