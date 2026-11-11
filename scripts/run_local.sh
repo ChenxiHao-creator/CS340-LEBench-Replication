@@ -13,9 +13,9 @@ LOG_FILE="$LOG_DIR/${TAG}.log"
 
 export LEBENCH_DIR="/home/deng/LEBench/"
 
-echo "======================================"
+echo "======================================="
 echo "Starting local experiment: $TAG"
-echo "======================================"
+echo "======================================="
 
 $WORKSPACE_DIR/scripts/precheck.sh >> $LOG_FILE 2>&1
 echo "[Starting LEBench...]" | tee -a $LOG_FILE
@@ -41,7 +41,7 @@ else
     echo "Note: No output CSV found in LEBENCH_DIR (Data is safely recorded in the .log file)." >> $LOG_FILE
 fi
 
-echo "======================================"
+echo "======================================="
 echo "✅ Experiment $TAG finished!"
 echo "Log saved to: $LOG_FILE"
-echo "======================================"
+echo "======================================="
