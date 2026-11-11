@@ -85,8 +85,10 @@ Test took: 21.483819193 seconds
 Performing test epoll big.
 Test took: 28.132996012 seconds
 Total Test took: 1031.274880725 seconds
+```
 
 ### Run 2 (A1) Raw Results
+```text
 Performing test ref.
 Test took: 0.393335797 seconds
 Performing test cpu.
@@ -156,3 +158,4 @@ Test took: 15.866663963 seconds
 Performing test epoll big.
 Test took: 20.795171853 seconds
 Total Test took: 1774.533460105 seconds
+```
