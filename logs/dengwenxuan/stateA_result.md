@@ -9,7 +9,6 @@ Here is the comparison of the `read` operations extracted from two independent r
 | **big read** | 2.804245023 | 7.381041708 | +4.576796685 |
 | **huge read** | 165.237767647 | 328.806539749 | +163.568772102 |
 
-*Note: There is a significant performance variance between Run 1 and Run 2. This is likely due to VM resource contention or host-level background noise, as mentioned in the environment precheck.*
 
 ---
 
