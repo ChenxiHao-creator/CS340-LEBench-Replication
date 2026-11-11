@@ -1,233 +1,197 @@
-# READ PERFORMANCE RESULTS (STATUS A)
+# READ PERFORMANCE RESULTS (PTI_OFF_NOPCID)
 
-Here is the comparison of the `read` operations extracted from three independent runs under Status A. 
+Here is the comparison of the `read` operations extracted from two independent runs (labeled as Run 1 and Run 2) under the same `pti=off nopcid` state. 
 
-| Test Case | Run 1 (A1) Time (s) | Run 2 (A2) Time (s) | Run 3 (A3) Time (s) |
-| :--- | :--- | :--- | :--- |
-| **small read** | 0.197453722 | 0.355476539 | 0.404381948 |
-| **mid read** | 0.334391163 | 0.690894401 | 0.704024703 |
-| **big read** | 2.804245023 | 7.381041708 | 7.533062629 |
-| **huge read** | 165.237767647 | 328.806539749 | 144.939134208 |
+The data is extracted from the `kbest` and `average` metrics in the raw CSV files, which is the standard methodology used in the SOSP '19 paper to filter out VM noise.
 
-*Note: There is significant performance variance across the three runs, especially in the `huge read` test (Run 2 is more than twice as slow as Run 3). This is highly likely due to VM resource contention or host-level background noise (e.g., Windows host throttling or disk I/O caching), as mentioned in the environment precheck.*
+| Test Case | Run 1 (kbest) | Run 1 (average) | Run 2 (kbest) | Run 2 (average) |
+| :--- | :--- | :--- | :--- | :--- |
+| **small read** | 0.000000193 | 0.000000217 | 0.000000606 | 0.000000821 |
+| **mid read** | 0.000001077 | 0.000001164 | 0.000003376 | 0.000003865 |
+| **big read** | 0.000168999 | 0.000190963 | 0.000619949 | 0.000741787 |
+| **huge read** | 0.011147254 | 0.011983167 | 0.011107414 | 0.013700402 |
+
+*Note: The times are in seconds. Run 2 shows a significant slowdown in small/mid/big read operations (over 200% increase in kbest latency), while the huge read remains relatively stable. This discrepancy is likely due to host-level background noise (e.g., Windows host processing or disk I/O caching) affecting the VM, which perfectly demonstrates why the `kbest` metric and multiple runs are required for VM-based experiments.*
 
 ---
 
-# FULL BENCHMARK RAW RESULTS (STATUS A)
+# FULL RAW CSV DATA
 
-### Run 1 Raw Results
+### Run 1 (Raw CSV Output)
 ```text
-Performing test ref.
-Test took: 0.291500070 seconds
-Performing test cpu.
-Test took: 0.305247225 seconds
-Performing test getpid.
-Test took: 0.337269818 seconds
-Performing test context siwtch.
-Test took: 343.115664150 seconds
-Performing test send.
-Test took: 0.692053171 seconds
-Performing test recv.
-Test took: 0.637672569 seconds
-Performing test big send.
-Test took: 5.280509587 seconds
-Performing test big recv.
-Test took: 6.085301776 seconds
-Performing test fork.
-Test took: 3.560031719 seconds
-Performing test thr create.
-Test took: 4.244449493 seconds
-Performing test big fork.
-Test took: 11.160676865 seconds
-Performing test huge fork.
-Test took: 24.888084637 seconds
-Performing test small write.
-Test took: 0.650918413 seconds
-Performing test small mmap.
-Test took: 0.296441919 seconds
-Performing test small munmap.
-Test took: 1.025437966 seconds
-Performing test small page fault.
-Test took: 0.267679141 seconds
-Performing test mid write.
-Test took: 4.276848971 seconds
-Performing test mid mmap.
-Test took: 0.236370416 seconds
-Performing test mid munmap.
-Test took: 5.956160432 seconds
-Performing test mid page fault.
-Test took: 0.434923668 seconds
-Performing test big write.
-Test took: 21.998816205 seconds
-Performing test big mmap.
-Test took: 0.197323110 seconds
-Performing test big munmap.
-Test took: 13.224072902 seconds
-Performing test big page fault.
-Test took: 0.293190132 seconds
-Performing test huge write.
-Test took: 143.266856069 seconds
-Performing test huge mmap.
-Test took: 0.242007028 seconds
-Performing test huge munmap.
-Test took: 132.145616115 seconds
-Performing test huge page fault.
-Test took: 0.259863381 seconds
-Performing test select.
-Test took: 1.723875859 seconds
-Performing test poll.
-Test took: 1.650772055 seconds
-Performing test epoll.
-Test took: 2.354638608 seconds
-Performing test select big.
-Test took: 21.694933126 seconds
-Performing test poll big.
-Test took: 21.483819193 seconds
-Performing test epoll big.
-Test took: 28.132996012 seconds
-Total Test took: 1031.274880725 seconds
+OS Benchmark experiment
+Test Name:,4.15.0-041500-generic,
+       ref          kbest:,0.000000047,
+       ref        average:,0.000000067,
+       cpu          kbest:,0.006508517,
+       cpu        average:,0.007019317,
+    getpid          kbest:,0.000000201,
+    getpid        average:,0.000000227,
+context siwtch          kbest:,0.000001731,
+context siwtch        average:,0.000004820,
+      send          kbest:,0.000000190,
+      send        average:,0.000000238,
+      recv          kbest:,0.000000231,
+      recv        average:,0.000000286,
+  big send          kbest:,0.000002764,
+  big send        average:,0.000003275,
+  big recv          kbest:,0.000002847,
+  big recv        average:,0.000004894,
+      fork          kbest:,0.000027481,
+      fork       average:,0.000037766,
+      fork    Child kbest:,0.000048757,
+      fork Child average:,0.000055277,
+thr create          kbest:,0.000002155,
+thr create       average:,0.000011129,
+thr create    Child kbest:,0.000003798,
+thr create Child average:,0.000016403,
+  big fork          kbest:,0.000618049,
+  big fork       average:,0.000770195,
+  big fork    Child kbest:,0.000644115,
+  big fork Child average:,0.000825355,
+ huge fork          kbest:,0.001214712,
+ huge fork       average:,0.001512506,
+ huge fork    Child kbest:,0.001257673,
+ huge fork Child average:,0.001573287,
+small write          kbest:,0.000000500,
+small write        average:,0.000000547,
+small read          kbest:,0.000000193,
+small read        average:,0.000000217,
+small mmap          kbest:,0.000000289,
+small mmap        average:,0.000000308,
+small munmap          kbest:,0.000000900,
+small munmap        average:,0.000000996,
+small page fault          kbest:,0.000000583,
+small page fault        average:,0.000000633,
+ mid write          kbest:,0.000003137,
+ mid write        average:,0.000003341,
+  mid read          kbest:,0.000001077,
+  mid read        average:,0.000001164,
+  mid mmap          kbest:,0.000000284,
+  mid mmap        average:,0.000000308,
+mid munmap          kbest:,0.000002519,
+mid munmap        average:,0.000002714,
+mid page fault          kbest:,0.000000888,
+mid page fault        average:,0.000000951,
+ big write          kbest:,0.000362896,
+ big write        average:,0.000433540,
+  big read          kbest:,0.000168999,
+  big read        average:,0.000190963,
+  big mmap          kbest:,0.000000294,
+  big mmap        average:,0.000000326,
+big munmap          kbest:,0.000049731,
+big munmap        average:,0.000056262,
+big page fault          kbest:,0.000000941,
+big page fault        average:,0.000001061,
+huge write          kbest:,0.007503210,
+huge write        average:,0.008113668,
+ huge read          kbest:,0.011147254,
+ huge read        average:,0.011983167,
+ huge mmap          kbest:,0.000000283,
+ huge mmap        average:,0.000000316,
+huge munmap          kbest:,0.000580096,
+huge munmap        average:,0.000713591,
+huge page fault          kbest:,0.000001006,
+huge page fault        average:,0.000001162,
+    select          kbest:,0.000000613,
+    select        average:,0.000000685,
+      poll          kbest:,0.000000634,
+      poll        average:,0.000000721,
+     epoll          kbest:,0.000000742,
+     epoll        average:,0.000000930,
+select big          kbest:,0.000090199,
+select big        average:,0.000198512,
+  poll big          kbest:,0.000098874,
+  poll big        average:,0.000214681,
+ epoll big          kbest:,0.000113593,
+ epoll big        average:,0.000230333,
 ```
-### Run 2 Raw Results
-```text
-Performing test ref.
-Test took: 0.393335797 seconds
-Performing test cpu.
-Test took: 0.309023538 seconds
-Performing test getpid.
-Test took: 0.401321968 seconds
-Performing test context siwtch.
-Test took: 596.499216726 seconds
-Performing test send.
-Test took: 1.432221697 seconds
-Performing test recv.
-Test took: 1.503301843 seconds
-Performing test big send.
-Test took: 12.583828157 seconds
-Performing test big recv.
-Test took: 14.065300142 seconds
-Performing test fork.
-Test took: 8.580195097 seconds
-Performing test thr create.
-Test took: 10.473800426 seconds
-Performing test big fork.
-Test took: 23.281535544 seconds
-Performing test huge fork.
-Test took: 45.609047381 seconds
-Performing test small write.
-Test took: 1.281539222 seconds
-Performing test small mmap.
-Test took: 0.479267558 seconds
-Performing test small munmap.
-Test took: 2.038473458 seconds
-Performing test small page fault.
-Test took: 0.596246273 seconds
-Performing test mid write.
-Test took: 8.744029756 seconds
-Performing test mid mmap.
-Test took: 0.460715886 seconds
-Performing test mid munmap.
-Test took: 12.189864132 seconds
-Performing test mid page fault.
-Test took: 0.812418486 seconds
-Performing test big write.
-Test took: 46.765527040 seconds
-Performing test big mmap.
-Test took: 0.524349327 seconds
-Performing test big munmap.
-Test took: 29.431703382 seconds
-Performing test big page fault.
-Test took: 0.599668822 seconds
-Performing test huge write.
-Test took: 302.519699889 seconds
-Performing test huge mmap.
-Test took: 0.514858081 seconds
-Performing test huge munmap.
-Test took: 198.311726607 seconds
-Performing test huge page fault.
-Test took: 0.176032882 seconds
-Performing test select.
-Test took: 1.106070336 seconds
-Performing test poll.
-Test took: 1.104660293 seconds
-Performing test epoll.
-Test took: 1.564161487 seconds
-Performing test select big.
-Test took: 16.132153429 seconds
-Performing test poll big.
-Test took: 15.866663963 seconds
-Performing test epoll big.
-Test took: 20.795171853 seconds
-Total Test took: 1774.533460105 seconds
-```
-### Run 3 Raw Results
-```text
-Performing test ref.
-Test took: 0.659188156 seconds
-Performing test cpu.
-Test took: 0.681617704 seconds
-Performing test getpid.
-Test took: 0.854768414 seconds
-Performing test context siwtch.
-Test took: 753.114506911 seconds
-Performing test send.
-Test took: 1.515120683 seconds
-Performing test recv.
-Test took: 1.546685903 seconds
-Performing test big send.
-Test took: 12.803727756 seconds
-Performing test big recv.
-Test took: 14.240271162 seconds
-Performing test fork.
-Test took: 8.473853340 seconds
-Performing test thr create.
-Test took: 10.773871238 seconds
-Performing test big fork.
-Test took: 25.549467277 seconds
-Performing test huge fork.
-Test took: 48.133762267 seconds
-Performing test small write.
-Test took: 1.369813512 seconds
-Performing test small mmap.
-Test took: 0.479196479 seconds
-Performing test small munmap.
-Test took: 2.242710845 seconds
-Performing test small page fault.
-Test took: 0.661376391 seconds
-Performing test mid write.
-Test took: 9.562801643 seconds
-Performing test mid mmap.
-Test took: 0.467701659 seconds
-Performing test mid munmap.
-Test took: 12.823994604 seconds
-Performing test mid page fault.
-Test took: 0.942027129 seconds
-Performing test big write.
-Test took: 47.296816334 seconds
-Performing test big mmap.
-Test took: 0.506695641 seconds
-Performing test big munmap.
-Test took: 30.337670348 seconds
-Performing test big page fault.
-Test took: 0.645847520 seconds
-Performing test huge write.
-Test took: 305.920527942 seconds
-Performing test huge mmap.
-Test took: 0.137282189 seconds
-Performing test huge munmap.
-Test took: 92.235174101 seconds
-Performing test huge page fault.
-Test took: 0.177065436 seconds
-Performing test select.
-Test took: 1.087127359 seconds
-Performing test poll.
-Test took: 1.075551937 seconds
-Performing test epoll.
-Test took: 1.556377670 seconds
-Performing test select big.
-Test took: 16.410595332 seconds
-Performing test poll big.
-Test took: 15.844515717 seconds
-Performing test epoll big.
-Test took: 23.343244412 seconds
-Total Test took: 1657.192689467 seconds
+### Run 2 (Raw CSV Output)
+```test
+OS Benchmark experiment
+Test Name:,4.15.0-041500-generic,
+       ref          kbest:,0.000000047,
+       ref        average:,0.000000061,
+       cpu          kbest:,0.006497532,
+       cpu        average:,0.006814867,
+    getpid          kbest:,0.000000201,
+    getpid        average:,0.000000222,
+context siwtch          kbest:,0.000001432,
+context siwtch        average:,0.000006666,
+      send          kbest:,0.000000603,
+      send        average:,0.000000899,
+      recv          kbest:,0.000000744,
+      recv        average:,0.000000973,
+  big send          kbest:,0.000009759,
+  big send        average:,0.000012755,
+  big recv          kbest:,0.000009206,
+  big recv        average:,0.000014785,
+      fork          kbest:,0.000091628,
+      fork       average:,0.000141301,
+      fork    Child kbest:,0.000155671,
+      fork Child average:,0.000216992,
+thr create          kbest:,0.000006546,
+thr create       average:,0.000044540,
+thr create    Child kbest:,0.000010092,
+thr create Child average:,0.000065921,
+  big fork          kbest:,0.002106673,
+  big fork       average:,0.002593963,
+  big fork    Child kbest:,0.002195634,
+  big fork Child average:,0.002749842,
+ huge fork          kbest:,0.004159491,
+ huge fork       average:,0.005126758,
+ huge fork    Child kbest:,0.004248002,
+ huge fork Child average:,0.005300311,
+small write          kbest:,0.000001599,
+small write        average:,0.000002121,
+small read          kbest:,0.000000606,
+small read        average:,0.000000821,
+small mmap          kbest:,0.000000911,
+small mmap        average:,0.000001160,
+small munmap          kbest:,0.000002960,
+small munmap        average:,0.000003757,
+small page fault          kbest:,0.000001874,
+small page fault        average:,0.000002263,
+ mid write          kbest:,0.000010032,
+ mid write        average:,0.000012222,
+  mid read          kbest:,0.000003376,
+  mid read        average:,0.000003865,
+  mid mmap          kbest:,0.000000901,
+  mid mmap        average:,0.000001092,
+mid munmap          kbest:,0.000008186,
+mid munmap        average:,0.000010035,
+mid page fault          kbest:,0.000002730,
+mid page fault        average:,0.000003538,
+ big write          kbest:,0.001287600,
+ big write        average:,0.001569293,
+  big read          kbest:,0.000619949,
+  big read        average:,0.000741787,
+  big mmap          kbest:,0.000000930,
+  big mmap        average:,0.000001178,
+big munmap          kbest:,0.000168897,
+big munmap        average:,0.000239355,
+big page fault          kbest:,0.000003031,
+big page fault        average:,0.000003763,
+huge write          kbest:,0.007065836,
+huge write        average:,0.018796111,
+ huge read          kbest:,0.011107414,
+ huge read        average:,0.013700402,
+ huge mmap          kbest:,0.000000282,
+ huge mmap        average:,0.000000307,
+huge munmap          kbest:,0.000632101,
+huge munmap        average:,0.000718738,
+huge page fault          kbest:,0.000000943,
+huge page fault        average:,0.000001063,
+    select          kbest:,0.000000610,
+    select        average:,0.000000816,
+      poll          kbest:,0.000000633,
+      poll        average:,0.000000705,
+     epoll          kbest:,0.000000737,
+     epoll        average:,0.000000875,
+select big          kbest:,0.000131785,
+select big        average:,0.000231404,
+  poll big          kbest:,0.000144427,
+  poll big        average:,0.000224346,
+ epoll big          kbest:,0.000165427,
+ epoll big        average:,0.000273428,
 ```
