@@ -11,9 +11,7 @@ The data is extracted from the `kbest` and `average` metrics in the raw CSV file
 | **big read** | 0.000168999 | 0.000190963 | 0.000619949 | 0.000741787 |
 | **huge read** | 0.011147254 | 0.011983167 | 0.011107414 | 0.013700402 |
 
-*Note: The times are in seconds. Run 2 shows a significant slowdown in small/mid/big read operations (over 200% increase in kbest latency), while the huge read remains relatively stable. This discrepancy is likely due to host-level background noise (e.g., Windows host processing or disk I/O caching) affecting the VM, which perfectly demonstrates why the `kbest` metric and multiple runs are required for VM-based experiments.*
 
----
 
 # FULL RAW CSV DATA
 
