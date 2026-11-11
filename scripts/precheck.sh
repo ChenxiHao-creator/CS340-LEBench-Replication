@@ -16,11 +16,13 @@ else
     echo "=> KPTI is [DISABLED] (disabled / pti=off)"
 fi
 
-echo -e "\n[4] CPU PCID Support:"
-if grep -q "pcid" /proc/cpuinfo; then
-    echo "=> PCID supported (pcid flag present)"
+echo -e "\n[4] PCID Status:"
+if grep -q "nopcid" /proc/cmdline; then
+    echo "=> [DISABLED] (boot parameter active: nopcid)"
+elif grep -q "pcid" /proc/cpuinfo; then
+    echo "=> [NOT DISABLED / ENABLED] (CPU supported and no nopcid parameter)"
 else
-    echo "=> PCID not supported"
+    echo "=> [NOT SUPPORTED] (CPU hardware does not support PCID)"
 fi
 
 echo -e "\n[5] Current CPU Frequency Governor:"
