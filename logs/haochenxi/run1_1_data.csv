@@ -1,0 +1,9 @@
+suhongyu@ubuntu:~/LEBench_Workspace/scripts$ grep -i read ~/LEBench_Workspace/logs/suhongyu/run1_1_data.csv
+small read          kbest:,0.000000887,
+small read        average:,0.000000977,
+  mid read          kbest:,0.000003567,
+  mid read        average:,0.000003962,
+  big read          kbest:,0.000636198,
+  big read        average:,0.000701146,
+ huge read          kbest:,0.028744325,
+ huge read        average:,0.030193609,
