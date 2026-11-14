@@ -1,5 +1,4 @@
 import os
-import csv
 
 LOG_DIRS = [
     'logs/dengwenxuan',
@@ -8,16 +7,18 @@ LOG_DIRS = [
     'logs/zhanghanyun'
 ]
 
-def parse_csv_file(filepath):
+def parse_text_file(filepath):
     results = {}
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
-            reader = csv.reader(f)
-            for row in reader:
-                if len(row) >= 3 and 'average:' in row[1]:
-                    test_name = row[0].strip()
+            for line in f:
+                parts = line.split() 
+
+                if len(parts) >= 3 and 'average:' in parts:
+                    idx = parts.index('average:')
+                    test_name = parts[idx - 1].strip()
                     try:
-                        value = float(row[2].strip())
+                        value = float(parts[idx + 1].strip())
                         results[test_name] = value
                     except ValueError:
                         pass
@@ -41,9 +42,9 @@ def main():
         stateB_data = {test: [] for test in target_tests}
 
         for filename in os.listdir(directory):
-            if filename.endswith(".csv"):
+            if filename.endswith(".csv") or filename.endswith(".log"):
                 filepath = os.path.join(directory, filename)
-                parsed_data = parse_csv_file(filepath)
+                parsed_data = parse_text_file(filepath)
                 
                 if 'stateA' in filename:
                     for key in target_tests:
