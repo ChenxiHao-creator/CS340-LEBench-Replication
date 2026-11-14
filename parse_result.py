@@ -54,7 +54,6 @@ def main():
                 if filename.endswith(".log"):
                     filepath = os.path.join(directory, filename)
                     data = parse_log_file(filepath)
-
                     print(f"  📄 File: {filename}")
                     for metric, values in data.items():
                         if values:
