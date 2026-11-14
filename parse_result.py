@@ -2,7 +2,12 @@ import os
 import re
 import numpy as np
 
-LOG_DIRS = ['../logs/deng', '../logs/han', '../logs/zhang']
+LOG_DIRS = [
+    'logs/dengwenxuan',
+    'logs/haochenxi',
+    'logs/suhongyu',
+    'logs/zhanghanyun'
+]
 
 def parse_log_file(filepath):
     results = {
@@ -44,11 +49,19 @@ def main():
     print("Scanning log directories...")
     for directory in LOG_DIRS:
         if os.path.exists(directory):
-            print(f"Found directory: {directory}")
+            print(f"\n📁 Found directory: {directory}")
             for filename in os.listdir(directory):
                 if filename.endswith(".log"):
                     filepath = os.path.join(directory, filename)
                     data = parse_log_file(filepath)
+
+                    print(f"  📄 File: {filename}")
+                    for metric, values in data.items():
+                        if values:
+                            mean_val, std_val = calculate_statistics(values)
+                            print(f"     - {metric}: Mean = {mean_val:.2f}, Std = {std_val:.2f}")
+                        else:
+                            print(f"     - {metric}: No data found")
         else:
             print(f"Warning: Directory {directory} not found. Please check uploads.")
 
