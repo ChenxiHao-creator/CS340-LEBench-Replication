@@ -1,0 +1,77 @@
+Performing test ref.
+Test took: 0.659188156 seconds
+Performing test cpu.
+Test took: 0.681617704 seconds
+Performing test getpid.
+Test took: 0.854768414 seconds
+Performing test context siwtch.
+Test took: 753.114506911 seconds
+Performing test send.
+Test took: 1.515120683 seconds
+Performing test recv.
+Test took: 1.546685903 seconds
+Performing test big send.
+Test took: 12.803727756 seconds
+Performing test big recv.
+Test took: 14.240271162 seconds
+Performing test fork.
+Test took: 8.473853340 seconds
+Performing test thr create.
+Test took: 10.773871238 seconds
+Performing test big fork.
+Test took: 25.549467277 seconds
+Performing test huge fork.
+Test took: 48.133762267 seconds
+Performing test small write.
+Test took: 1.369813512 seconds
+Performing test small read.
+Test took: 0.404381948 seconds
+Performing test small mmap.
+Test took: 0.479196479 seconds
+Performing test small munmap.
+Test took: 2.242710845 seconds
+Performing test small page fault.
+Test took: 0.661376391 seconds
+Performing test mid write.
+Test took: 9.562801643 seconds
+Performing test mid read.
+Test took: 0.704024703 seconds
+Performing test mid mmap.
+Test took: 0.467701659 seconds
+Performing test mid munmap.
+Test took: 12.823994604 seconds
+Performing test mid page fault.
+Test took: 0.942027129 seconds
+Performing test big write.
+Test took: 47.296816334 seconds
+Performing test big read.
+Test took: 7.533062629 seconds
+Performing test big mmap.
+Test took: 0.506695641 seconds
+Performing test big munmap.
+Test took: 30.337670348 seconds
+Performing test big page fault.
+Test took: 0.645847520 seconds
+Performing test huge write.
+Test took: 305.920527942 seconds
+Performing test huge read.
+Test took: 144.939134208 seconds
+Performing test huge mmap.
+Test took: 0.137282189 seconds
+Performing test huge munmap.
+Test took: 92.235174101 seconds
+Performing test huge page fault.
+Test took: 0.177065436 seconds
+Performing test select.
+Test took: 1.087127359 seconds
+Performing test poll.
+Test took: 1.075551937 seconds
+Performing test epoll.
+Test took: 1.556377670 seconds
+Performing test select big.
+Test took: 16.410595332 seconds
+Performing test poll big.
+Test took: 15.844515717 seconds
+Performing test epoll big.
+Test took: 23.343244412 seconds
+Test took: 1657.192689467 seconds
