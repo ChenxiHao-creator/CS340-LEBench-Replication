@@ -2,6 +2,7 @@
       Environment Precheck          
 ======================================
 
+
 [1] Kernel Version:
 4.15.0-041500-generic
 
