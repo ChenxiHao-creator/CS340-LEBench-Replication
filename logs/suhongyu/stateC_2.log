@@ -21,8 +21,8 @@ BOOT_IMAGE=/boot/vmlinuz-4.15.0-213-generic root=UUID=e61f22ac-4587-4615-bb1e-86
 ✅ snapd stopped
 ✅ unattended-upgrades stopped
 
->>> 6. Expected state check (arg: B):
-✅ State B confirmed (pti=on, PCID usable)
+>>> 6. Expected state check (arg: C):
+✅ State C confirmed (pti=on, PCID usable)
 
 ===================== PRECHECK END =====================
 If everything looks good, you can run benchmark now!
@@ -200151,11 +200151,11 @@ Total test iteration 10000.
 Test took: 70.255570865 seconds
 Test took: 2134.943320706 seconds
 
- Performance counter stats for 'env LEBENCH_DIR=/home/suhongyu/LEBench/ ./OS_Eval 0 4.15.0-213-B':
+ Performance counter stats for 'env LEBENCH_DIR=/home/suhongyu/LEBench/ ./OS_Eval 0 4.15.0-213-C':
 
  2,712,874,349,007      cycles                                                      
          2,354,841      cpu/event=0xcb,umask=0x01/                                   
 
     2134.946372962 seconds time elapsed
 
-✅ CSV 已保存: /home/suhongyu/LEBench_Workspace/logs/suhongyu/stateB_2_data.csv
+✅ CSV 已保存: /home/suhongyu/LEBench_Workspace/logs/suhongyu/stateC_2_data.csv
