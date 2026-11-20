@@ -11,8 +11,8 @@ BOOT_IMAGE=/boot/vmlinuz-4.15.0-041500-generic root=UUID=b3f38b19-032c-4953-b435
 [3] KPTI Status (Isolation):
 => KPTI is [ENABLED]
 
-[4] CPU PCID Support:
-=> PCID supported (pcid flag present)
+[4] PCID Status:
+=> [DISABLED] (boot parameter active: nopcid)
 
 [5] Current CPU Frequency Governor:
 No cpufreq interface (possibly unsupported)
