@@ -1,16 +1,31 @@
- Performance counter stats for 'env LEBENCH_DIR=/home/suhongyu/LEBench/ ./OS_Eval 0 4.15.0-213-B':
+# started on Fri Nov 20 03:12:06 2026
 
- 2,699,504,372,265      cycles                                                      
-         2,426,972      cpu/event=0xcb,umask=0x01/                                   
 
-    2127.957813318 seconds time elapsed
+ Performance counter stats for 'env LEBENCH_DIR=/home/deng/LEBench/ ./OS_Eval 0 4.15.0-041500-generic':
 
-✅ CSV 已保存: /home/suhongyu/LEBench_Workspace/logs/suhongyu/stateB_1_data.csv
- Performance counter stats for 'env LEBENCH_DIR=/home/suhongyu/LEBench/ ./OS_Eval 0 4.15.0-213-B':
+     748165.483580      task-clock (msec)         #    0.912 CPUs utilized          
+ 3,161,377,102,997      cycles                    #    4.226 GHz                    
+ 4,364,677,146,464      instructions              #    1.38  insn per cycle         
+       200,569,449      context-switches          #    0.268 M/sec                  
+           100,092      cpu-migrations            #    0.134 K/sec                  
+       157,782,612      page-faults               #    0.211 M/sec                  
+           779,044      cpu/event=0xcb,umask=0x01/ #    0.001 M/sec                  
 
- 2,712,874,349,007      cycles                                                      
-         2,354,841      cpu/event=0xcb,umask=0x01/                                   
+     820.039515508 seconds time elapsed
 
-    2134.946372962 seconds time elapsed
+# started on Fri Nov 20 04:17:43 2026
 
-✅ CSV 已保存: /home/suhongyu/LEBench_Workspace/logs/suhongyu/stateB_2_data.csv
+
+ Performance counter stats for 'env LEBENCH_DIR=/home/deng/LEBench/ ./OS_Eval 0 4.15.0-041500-generic':
+
+     739711.930030      task-clock (msec)         #    0.912 CPUs utilized          
+ 3,126,133,775,328      cycles                    #    4.226 GHz                    
+ 4,364,165,789,376      instructions              #    1.40  insn per cycle         
+       200,572,606      context-switches          #    0.271 M/sec                  
+           100,192      cpu-migrations            #    0.135 K/sec                  
+       157,604,614      page-faults               #    0.213 M/sec                  
+           844,943      cpu/event=0xcb,umask=0x01/ #    0.001 M/sec                  
+
+     811.236399901 seconds time elapsed
+
+
