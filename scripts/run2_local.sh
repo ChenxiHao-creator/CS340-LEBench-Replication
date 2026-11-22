@@ -1,7 +1,7 @@
 #!/bin/bash
-# run_local_perf.sh —— run_local.sh + perf stat 采集（报告并入 .log）
-# 用法: ./run_local_perf.sh <experiment_tag_name>
-# 示例: ./run_local_perf.sh stateB_pti_on_nopcid_perf_run1
+# run_local_perf.sh -- run_local.sh + perf stat collection (output appended to .log)
+# Usage: ./run_local_perf.sh <experiment_tag_name>
+# Example: ./run_local_perf.sh stateB_pti_on_nopcid_perf_run1
 
 if [ -z "$1" ]; then
     echo "Usage: ./run_local_perf.sh <experiment_tag_name>"
