@@ -1,15 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-parse_result_dir2.py — 方向二（KPTI/PCID）数据汇总脚本  v2
-适配 2026-11 版目录结构：
-  logs/<成员>/stateX_N.log + stateX_N_data.csv   → 延迟（average 行），状态靠 log 里的真实 cmdline 判定
-  logs/perf_All/*.txt                            → 汇总池 perf 文件（状态只认文件名）
-  logs/<成员>/perf_state[ABC]*                   → 成员目录自带 perf 文件（浩辰西的文件没有 .txt 后缀也算）
-  .log 文件内嵌的 perf 输出                       → 兜底来源（状态靠 cmdline 判定）
-同一（成员, 状态）只计数一次，优先级：perf_All > 成员目录 perf 文件 > .log 内嵌。
-输出：docs/Direction2_PCID_Analysis.xlsx（Dir2 Latency / Dir2 HW Counters 两个 sheet）
-"""
+
 import os
 import re
 import glob
@@ -27,7 +18,7 @@ LOG_DIRS = [
     'logs/suhongyu',
     'logs/zhanghanyun'
 ]
-PERF_POOL_DIR = 'logs/perf_All'          # 汇总池（新）
+PERF_POOL_DIR = 'logs/perf_All'
 
 READ_TESTS = ['small read', 'mid read', 'big read', 'huge read']
 STATES = ['stateA', 'stateB', 'stateC']
@@ -37,7 +28,6 @@ STATE_LABELS = {
     'stateC': 'C (pti=on, PCID on)',
 }
 
-# 从 perf 输出里的 LEBENCH_DIR 路径反推真正跑实验的人（防止"复制来的文件"挂错名）
 RUNNER_MAP = {
     'suhongyu': 'suhongyu', 'su': 'suhongyu',
     'dengwenxuan': 'dengwenxuan', 'deng': 'dengwenxuan',
@@ -46,7 +36,6 @@ RUNNER_MAP = {
 }
 RUNNER_KEYS = sorted(RUNNER_MAP.keys(), key=len, reverse=True)
 
-# ---------- 1. CSV 延迟解析（沿用方向一脚本逻辑：average 行） ----------
 def parse_file(filepath):
     results = {}
     try:
@@ -64,11 +53,6 @@ def parse_file(filepath):
         pass
     return results
 
-# ---------- 2. perf stat 文本解析：按 block 解析，支持一个文件里多轮跑 ----------
-# 兼容三种计数器写法：
-#   cycles                        标准事件名（苏泓宇的 VMware）
-#   cpu/event=0xcb,umask=0x01/    dTLB 原始编码（苏泓宇，内核 4.15 不认识 Raptor Lake）
-#   cpu_atom/xxx + cpu_core/xxx   大小核分开计数（张涵韵的混合架构 CPU）→ 脚本自动相加
 def parse_perf_blocks(filepath):
     try:
         with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
@@ -76,7 +60,6 @@ def parse_perf_blocks(filepath):
     except Exception:
         return [], None, None, None
 
-    # 真正跑的人（LEBENCH_DIR=... 路径里找名字）
     runner = None
     m = re.search(r'LEBENCH_DIR=(\S+)', content)
     if m:
@@ -86,13 +69,11 @@ def parse_perf_blocks(filepath):
                 runner = RUNNER_MAP[k]
                 break
 
-    # perf 标题里的内核版本（仅用于来源报告展示）
     kernel = None
     m = re.search(r"OS_Eval 0 (\S+?)'?:", content)
     if m:
         kernel = m.group(1)
 
-    # 标题里如果带 4.15.0-213-X 标签，提取出来和文件名核对
     header_state = None
     m = re.search(r'4\.15\.0-213-([ABC])', content)
     if m:
@@ -111,10 +92,10 @@ def parse_perf_blocks(filepath):
                 if elapsed is None:
                     elapsed = float(em.group(1))
                 continue
-            core = line.split('#')[0]          # 先砍掉注释，防止 "insn per cycle" 干扰
+            core = line.split('#')[0]
             tokens = core.split()
             if len(tokens) < 2 or not re.fullmatch(r'[\d,]+', tokens[0]):
-                continue                        # <not supported>、task-clock(带小数) 等自动跳过
+                continue
             val = int(tokens[0].replace(',', ''))
             event = tokens[1]
             if 'cycles' in event:
@@ -131,7 +112,6 @@ def parse_perf_blocks(filepath):
             })
     return blocks, runner, kernel, header_state
 
-# ---------- 3. 按日志里记录的真实 cmdline 判定状态（仅用于 .log 文件） ----------
 def detect_state_from_log(filepath):
     try:
         with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
@@ -162,7 +142,6 @@ def state_of(filename):
             return s
     return None
 
-# ---------- 4a. 汇总延迟（CSV） ----------
 def collect_latency():
     latency = {s: {t: [] for t in READ_TESTS} for s in STATES}
     print(f"\n{'='*60}\n[1/2] 延迟数据（*_data.csv，状态由同名 .log 的真实 cmdline 判定）\n{'='*60}")
@@ -194,16 +173,14 @@ def collect_latency():
             print(f"  [CSV] {member:<12} {filename:<26} -> {STATE_LABELS[eff]}")
     return latency
 
-# ---------- 4b. 汇总硬件计数器（三层来源 + 去重 + 归属核对） ----------
 def member_from_pool_filename(fname):
-    """perf_All 文件名规则：deng_perf_stateB.txt / zhang_perf_stateC.txt / perf_stateB.txt(苏泓宇自己的，无前缀)"""
     stem = fname.rsplit('.', 1)[0]
     m = re.match(r'([A-Za-z]+)_perf_(state[ABC])$', stem)
     if m:
         return RUNNER_MAP.get(m.group(1).lower()), m.group(2)
     m = re.match(r'perf_(state[ABC])$', stem)
     if m:
-        return 'suhongyu', m.group(1)   # 无前缀 = 苏泓宇自己提交的
+        return 'suhongyu', m.group(1)
     return None, None
 
 def collect_counters():
@@ -238,7 +215,6 @@ def collect_counters():
 
     print(f"\n{'='*60}\n[2/2] 硬件计数器（perf stat，状态只认文件名，去重后每人每状态只计一次）\n{'='*60}")
 
-    # 优先级 1：logs/perf_All/*.txt 汇总池
     if os.path.isdir(PERF_POOL_DIR):
         for fname in sorted(os.listdir(PERF_POOL_DIR)):
             if not fname.endswith('.txt'):
@@ -256,7 +232,6 @@ def collect_counters():
     else:
         print(f"  目录不存在: {PERF_POOL_DIR}")
 
-    # 优先级 2：成员目录里的 perf_state[ABC]* 文件（浩辰西的无 .txt 后缀也能匹配）
     for directory in LOG_DIRS:
         if not os.path.isdir(directory):
             continue
@@ -270,7 +245,6 @@ def collect_counters():
                 print(f"  ⚠️  {directory}/{fname}: 文件内 perf 标题写的是 4.15.0-213-{header_state[-1]}，文件名却是 {state} → 以文件名为准")
             consider(member2, state, blocks, f'{directory}/{fname}', kernel, 2)
 
-    # 优先级 3：.log 文件内嵌的 perf（状态用 cmdline 判定）
     for directory in LOG_DIRS:
         if not os.path.isdir(directory):
             continue
@@ -283,7 +257,6 @@ def collect_counters():
             member2 = runner_check(f'{directory}/{os.path.basename(path)}', member, runner)
             consider(member2, state, blocks, f'{directory}/{os.path.basename(path)}(log内嵌)', kernel, 3)
 
-    # 汇总 + 打印来源明细
     counters = {s: {'cycles': [], 'dtlb': [], 'elapsed': []} for s in STATES}
     print(f"\n  {'成员':<12} {'状态':<8} {'样本数':<6} 内核版本              来源")
     print('  ' + '-' * 80)
@@ -297,7 +270,6 @@ def collect_counters():
                 counters[state]['elapsed'].append(b['elapsed'])
         print(f"  {member:<12} {state:<8} {len(blocks):<6} {str(kernel):<21} {src}")
 
-    # 缺失提醒
     for member_dir in LOG_DIRS:
         member = os.path.basename(member_dir)
         if not os.path.isdir(member_dir):
@@ -307,7 +279,6 @@ def collect_counters():
                 print(f"  ⚠️  缺 {member} 的 {s} 硬件计数器（可把 perf 输出按 {member}_perf_{s}.txt 放进 {PERF_POOL_DIR}/）")
     return counters
 
-# ---------- 5. 生成表格 ----------
 def mean_std(vals):
     if not vals:
         return None, None
@@ -373,7 +344,6 @@ def build_counter_df(counters):
         rows.append(row)
     return pd.DataFrame(rows)
 
-# ---------- 6. Excel 样式 ----------
 def write_styled_sheet(ws, title, df, highlight_cols):
     num_cols = len(df.columns)
     end_col_letter = get_column_letter(num_cols)
@@ -430,7 +400,6 @@ def write_styled_sheet(ws, title, df, highlight_cols):
         ws.column_dimensions[column].width = min((max_length + 2) * 1.2, 30)
     ws.freeze_panes = 'A3'
 
-# ---------- 7. 主流程 ----------
 def main():
     latency = collect_latency()
     counters = collect_counters()
