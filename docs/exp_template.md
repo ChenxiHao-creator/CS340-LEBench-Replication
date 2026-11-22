@@ -18,14 +18,14 @@
 | med-read (10 pages) | 3 | | |
 | big-read (10000 pages) | 3 | | |
 
-### Status B: KPTI ON, PCID ON (pti=on)
+### Status B: KPTI ON, PCID ON (pti=on nopcid)
 | Workload | Runs | Log Filename (Format: pti_on_workload_id.log) | Exceptions |
 | :--- | :--- | :--- | :--- |
 | small-read (1 page) | 3 | | |
 | med-read (10 pages) | 3 | | |
 | big-read (10000 pages) | 3 | | |
 
-### Status C: KPTI ON, PCID OFF (pti=on nopcid)
+### Status C: KPTI ON, PCID OFF (pti=on)
 | Workload | Runs | Log Filename (Format: nopcid_workload_id.log) | Exceptions |
 | :--- | :--- | :--- | :--- |
 | small-read (1 page) | 3 | | |
