@@ -184,7 +184,7 @@ def member_from_pool_filename(fname):
     return None, None
 
 def collect_counters():
-    best = {}   # (member, state) -> (prio, src, kernel, blocks, hashes)
+    best = {}
 
     def consider(member, state, blocks, src, kernel, prio):
         if member is None or state is None or not blocks:
