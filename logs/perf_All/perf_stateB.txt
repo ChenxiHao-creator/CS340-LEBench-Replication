@@ -1,18 +1,30 @@
-# started on Fri Nov 20 18:28:52 2026
+# started on Fri Nov 20 01:48:25 2026
 
 
- Performance counter stats for 'env LEBENCH_DIR=/media/zhang/Data/OS input/CS340-LEBench-Replication-main/LEBench-master/ ./OS_Eval 0 4.15.0-041500-generic':
+ Performance counter stats for 'env LEBENCH_DIR=/home/deng/LEBench/ ./OS_Eval 0 4.15.0-041500-generic':
 
-     8,612,773,650      cpu_atom/dTLB-load-misses/       #    0.79% of all dTLB cache accesses  (2.05%)
-    29,998,369,267      cpu_core/dTLB-load-misses/       #    1.32% of all dTLB cache accesses  (97.95%)
- 1,096,196,291,047      cpu_atom/dTLB-loads/                                                    (2.05%)
- 2,278,015,241,393      cpu_core/dTLB-loads/                                                    (97.95%)
- 2,561,686,053,489      cpu_atom/cycles/                                                        (2.05%)
- 3,753,449,012,626      cpu_core/cycles/                                                        (97.95%)
+    1304699.417632      task-clock (msec)         #    0.945 CPUs utilized          
+ 4,733,872,920,450      cycles                    #    3.628 GHz                    
+ 4,344,933,448,593      instructions              #    0.92  insn per cycle         
+       200,603,200      context-switches          #    0.154 M/sec                  
+           100,067      cpu-migrations            #    0.077 K/sec                  
+       157,490,620      page-faults               #    0.121 M/sec                  
+         1,586,539      cpu/event=0xcb,umask=0x01/ #    0.001 M/sec                  
 
-     964.281245958 seconds time elapsed
+    1380.832950176 seconds time elapsed
 
-     238.959447000 seconds user
-     665.979807000 seconds sys
+# started on Fri Nov 20 02:27:27 2026
 
+
+ Performance counter stats for 'env LEBENCH_DIR=/home/deng/LEBench/ ./OS_Eval 0 4.15.0-041500-generic':
+
+    1548430.360856      task-clock (msec)         #    0.951 CPUs utilized          
+ 4,803,526,267,970      cycles                    #    3.102 GHz                    
+ 4,334,613,170,261      instructions              #    0.90  insn per cycle         
+       200,618,078      context-switches          #    0.130 M/sec                  
+           100,148      cpu-migrations            #    0.065 K/sec                  
+       157,490,615      page-faults               #    0.102 M/sec                  
+         1,768,492      cpu/event=0xcb,umask=0x01/ #    0.001 M/sec                  
+
+    1627.973843182 seconds time elapsed
 
