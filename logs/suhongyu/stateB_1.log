@@ -200151,11 +200151,4 @@ Total test iteration 10000.
 Test took: 117.790762039 seconds
 Test took: 3180.970761910 seconds
 
- Performance counter stats for 'env LEBENCH_DIR=/home/suhongyu/LEBench/ ./OS_Eval 0 4.15.0-213-B':
 
- 4,015,357,201,113      cycles                                                      
-         3,687,720      cpu/event=0xcb,umask=0x01/                                   
-
-    3180.978603991 seconds time elapsed
-
-✅ CSV 已保存: /home/suhongyu/LEBench_Workspace/logs/suhongyu/stateB_1_data.csv
