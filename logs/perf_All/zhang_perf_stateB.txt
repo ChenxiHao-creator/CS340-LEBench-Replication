@@ -1,0 +1,18 @@
+# started on Fri Nov 20 18:28:52 2026
+
+
+ Performance counter stats for 'env LEBENCH_DIR=/media/zhang/Data/OS input/CS340-LEBench-Replication-main/LEBench-master/ ./OS_Eval 0 4.15.0-041500-generic':
+
+     8,612,773,650      cpu_atom/dTLB-load-misses/       #    0.79% of all dTLB cache accesses  (2.05%)
+    29,998,369,267      cpu_core/dTLB-load-misses/       #    1.32% of all dTLB cache accesses  (97.95%)
+ 1,096,196,291,047      cpu_atom/dTLB-loads/                                                    (2.05%)
+ 2,278,015,241,393      cpu_core/dTLB-loads/                                                    (97.95%)
+ 2,561,686,053,489      cpu_atom/cycles/                                                        (2.05%)
+ 3,753,449,012,626      cpu_core/cycles/                                                        (97.95%)
+
+     964.281245958 seconds time elapsed
+
+     238.959447000 seconds user
+     665.979807000 seconds sys
+
+
