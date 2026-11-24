@@ -1,3 +1,5 @@
+
+```markdown
 # CS340 LEBench Replication: KPTI & PCID Overhead Analysis
 
 > **Course Project**: CS340 Operating Systems — Paper Replication  
@@ -37,10 +39,9 @@ All experiments run on fixed hardware with a single kernel version under strict 
 
 ## 3. Repository Structure
 
-```text
+
 CS340-LEBench-Replication/
 ├── docs/
-│   ├── report/                              # Final project report folder (.gitkeep)
 │   ├── results/                             # Output tables & comparison charts
 │   │   ├── dir1_ab_kpti_dilution_chart.png  # Direction 1: A vs. B latency & KPTI dilution
 │   │   ├── dir2_bc_hw_counters.png          # Direction 2: B vs. C cycles & dTLB-load-misses
@@ -66,6 +67,8 @@ CS340-LEBench-Replication/
 ├── .gitignore
 ├── original_commit.txt                      # Exact commit hash of upstream LEBench
 └── README.md
+
+```
 
 ---
 
@@ -98,7 +101,7 @@ CS340-LEBench-Replication/
 ## 5. Logs & Documentation Notes
 
 * **`logs/`**: Stores intermediate execution logs per member (`dengwenxuan/`, `haochenxi/`, `suhongyu/`, `zhanghanyun/`) and centralized `perf` outputs (`perf_All/`) used as inputs for aggregation and plotting.
-* **`docs/`**: Houses reference notes (`reading_notes.md`), environment records (`env_checklist.md`), replication vs. paper differences (`deviations.md`), final figures/tables under `docs/results/`, and report files under `docs/report/`.
+* **`docs/`**: Houses reference notes (`reading_notes.md`), environment records (`env_checklist.md`), replication vs. paper differences (`deviations.md`), and final figures/tables under `docs/results/`.
 
 ---
 
@@ -114,6 +117,7 @@ python3 scripts/direction_combain_barchart_code.py
 ```
 
 ```
+
 
 ```
 
