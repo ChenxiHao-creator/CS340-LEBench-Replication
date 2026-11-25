@@ -46,7 +46,6 @@ CS340-LEBench-Replication/
 │   │   ├── dir1_ab_kpti_dilution_chart.png  # Direction 1: A vs. B latency & KPTI dilution
 │   │   ├── dir2_bc_hw_counters.png          # Direction 2: B vs. C cycles & dTLB-load-misses
 │   │   ├── dir2_bc_read_latency.png         # Direction 2: B vs. C read latency comparison
-│   │   ├── direction1_kpti_effect_table.md  # Direction 1 quantitative summary table
 │   │   └── KPTI Latency & PCID Mitigation...# Combined analysis workbook / summary
 │   ├── deviations.md                        # Differences between replication and original paper
 │   ├── env_checklist.md                     # Hardware & kernel environment checklist
@@ -58,8 +57,8 @@ CS340-LEBench-Replication/
 │   ├── suhongyu/
 │   └── zhanghanyun/
 ├── scripts/                                 # Benchmark runners, aggregation & plotting
-│   ├── direction_combain_barchart_code.py   # Generates comparison charts from Excel sheets
-│   ├── direction_combain_table_code.py      # Aggregates & deduplicates group results to Excel
+│   ├── direction_combined_barchart_code.py   # Generates comparison charts from Excel sheets
+│   ├── direction_combined_table_code.py      # Aggregates & deduplicates group results to Excel
 │   ├── plot_result.py                       # Log parsing & plotting utility
 │   ├── precheck.sh                          # Pre-run environment validation script
 │   ├── run1_local.sh                        # Direction 1 benchmark runner
